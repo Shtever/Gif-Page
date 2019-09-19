@@ -1,3 +1,7 @@
 #gifView {
     text-align: center
 }
+
+.gif {
+    display: inline-block;
+}
