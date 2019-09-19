@@ -17,7 +17,7 @@ $("#findGif").on("click", function (event) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        for (var i = 0; i <= 10; i++) {
+        for (var i = 0; i < 10; i++) {
             var newDiv = $("<div class='gif'>");
             var ratingDiv = $("<span class='rating'>");
             var rating = "Rating: " + response.data[i].rating;
