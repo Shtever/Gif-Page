@@ -44,7 +44,7 @@ $("#findGif").on("click", function (event) {
             var animate = response.data[i].images.fixed_height.url;
             var still = response.data[i].images.fixed_height_still.url;
             var img = $("<img>")
-            img.attr("src", still);
+            img.attr("src", animate);
             img.attr("data-still", still);
             img.attr("data-animate", animate);
             img.attr("data-state", "still");
@@ -93,7 +93,7 @@ function gifSearch() {
                 var animate = response.data[i].images.fixed_height.url;
                 var still = response.data[i].images.fixed_height_still.url;
                 var img = $("<img>")
-                img.attr("src", still);
+                img.attr("src", animate);
                 img.attr("data-still", still);
                 img.attr("data-animate", animate);
                 img.attr("data-state", "still");
