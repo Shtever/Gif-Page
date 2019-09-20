@@ -1,7 +1,62 @@
+body {
+    text-align: center;
+    background-image: url(https://cdn.shopify.com/s/files/1/2168/6841/products/20170926_170216_1024x1024@2x.jpg?v=1506555135);
+    margin: 2% 5%;
+}
+
+#container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .7);
+}
+
+#buttons {
+    text-align: center;
+}
+
+.rating {
+    color: darkgreen;
+    font-size: 2vw;
+    font-weight: 900;
+}
+
+#header {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 10vw;
+    margin: 0;
+}
+
+#form {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 2vw;
+    margin: 0;
+}
+
+#userInput {
+    width: -webkit-fill-available;
+    margin: 0px 20%;
+    border: groove;
+    border-color: red;
+}
+
 #gifView {
     text-align: center
 }
 
 .gif {
     display: inline-block;
+    margin: 0 5px 10px 5px;
+    width: auto;
+}
+
+.btn {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 1.5vw;
+    margin-top: 10px;
+}
+
+#findGif {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 1.5vw;
+    margin-bottom: 5px;
 }

@@ -3,9 +3,10 @@ var sports = ["soccer", "baseball", "football", "basketball", "lacrosse", "hocke
 for (var j = 0; j < sports.length; j++) {
     var btn = $("<button>" + (sports[j]) + "</button>");
     $(btn).attr("class", "button");
+    $(btn).addClass("btn btn-info");
     $("#buttons").append(btn);
-    gifSearch();
 }
+gifSearch()
 
 
 // queryURL components//
@@ -36,10 +37,13 @@ $("#findGif").on("click", function (event) {
             var ratingDiv = $("<span class='rating'>");
             var rating = "Rating: " + response.data[i].rating;
             ratingDiv.text(rating);
-            var imgURL = response.data[i].images.fixed_height.url;
-            var imgStop = response.data[i].images.fixed_height_still.url;
-            var img = $("<img>").attr("src", imgURL);
-            $("<img>").attr("data-still", imgStop);
+            var animate = response.data[i].images.fixed_height.url;
+            var still = response.data[i].images.fixed_height_still.url;
+            var img = $("<img>")
+            img.attr("src", animate);
+            img.attr("data-still", still);
+            img.attr("data-animate", animate);
+            img.attr("data-state", "still");
             newDiv.append(img);
             newDiv.append("<br>");
             newDiv.append(ratingDiv);
@@ -49,18 +53,18 @@ $("#findGif").on("click", function (event) {
             function gifAnim() {
                 $(".gif").on("click", function () {
                     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                    var state = $(this).attr("data-state");
+                    var state = $("<img>").attr("data-state");
                     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
                     // Then, set the image's data-state to animate
                     // Else set src to the data-still value
                     if (state === "still") {
-                        $(this).attr("src", imgURL);
+                        $(this).attr('src', still);
                         $(this).attr("data-state", "animate");
                     } else {
-                        $(this).attr("src", imgStop);
+                        $(this).attr('src', animate);
                         $(this).attr("data-state", "still");
                     }
-                })
+                });
             };
 
         }
@@ -73,6 +77,7 @@ function createButton() {
     var btn = document.createElement("button");
     btn.innerHTML = $("#userInput").val();
     $(btn).attr("class", "button");
+    $(btn).addClass("btn btn-info");
     $("#buttons").append(btn);
 }
 
@@ -87,20 +92,23 @@ function gifSearch() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            for (var i = 0; i <= 10; i++) {
+            for (var i = 0; i < 10; i++) {
                 var newDiv = $("<div class='gif'>");
                 var ratingDiv = $("<span class='rating'>");
                 var rating = "Rating: " + response.data[i].rating;
                 ratingDiv.text(rating);
-                var imgURL = response.data[i].images.fixed_height.url;
-                var imgStop = response.data[i].images.fixed_height_still.url;
-                var img = $("<img>").attr("src", imgURL);
-                $("<img>").attr("data-still", imgStop);
+                var animate = response.data[i].images.fixed_height.url;
+                var still = response.data[i].images.fixed_height_still.url;
+                var img = $("<img>")
+                img.attr("src", animate);
+                img.attr("data-still", still);
+                img.attr("data-animate", animate);
+                img.attr("data-state", "still");
                 newDiv.append(img);
                 newDiv.append("<br>");
                 newDiv.append(ratingDiv);
-                prependGifs(newDiv)
-                gifAnim()
+                prependGifs(newDiv);
+                gifAnim();
 
 
                 function gifAnim() {
@@ -111,24 +119,29 @@ function gifSearch() {
                         // Then, set the image's data-state to animate
                         // Else set src to the data-still value
                         if (state === "still") {
-                            $(this).attr("src", imgURL);
+                            $(this).attr("src", $(this).attr("data-animate"));
                             $(this).attr("data-state", "animate");
                         } else {
-                            $(this).attr("src", imgStop);
+                            $(this).attr("src", $(this).attr("data-still"));
                             $(this).attr("data-state", "still");
                         }
-                    })
+                    });
                 };
-    
-            }
 
-        })
-    })
+
+
+
+
+
+
+
+}
+
+})
+})
 }
 // group img and rating and place them in the "gifView div"
 //put the gifs on the page
 function prependGifs(newDiv) {
     $("#gifView").prepend(newDiv);
-    // $("#gifImage").prepend(img);
-    $(this).attr("src", $(this).attr("data-still"));
 }
