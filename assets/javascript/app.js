@@ -1,6 +1,5 @@
 //document.ready so input border animation syncs with header animation
 $(document).ready
-debugger;
 
 
 // Populate buttons at sports top of page
@@ -44,7 +43,7 @@ $("#findGif").on("click", function (event) {
             var animate = response.data[i].images.fixed_height.url;
             var still = response.data[i].images.fixed_height_still.url;
             var img = $("<img>")
-            img.attr("src", animate);
+            img.attr("src", still);
             img.attr("data-still", still);
             img.attr("data-animate", animate);
             img.attr("data-state", "still");
@@ -53,22 +52,6 @@ $("#findGif").on("click", function (event) {
             newDiv.append("<br>");
             newDiv.append(ratingDiv);
             prependGifs(newDiv);
-            gifAnim();
-
-
-            function gifAnim() {
-                $(document).on("click", ".gifAnimation", function () {
-                    var state = $(this).attr("data-state");
-                    if (state === "still") {
-                        $(this).attr("src", $(this).attr("data-animate"));
-                        $(this).attr("data-state", "animate");
-                    } else {
-                        $(this).attr("src", $(this).attr("data-still"));
-                        $(this).attr("data-state", "still");
-                    }
-                });
-            };
-
 
         }
     });
@@ -93,7 +76,7 @@ function gifSearch() {
                 var animate = response.data[i].images.fixed_height.url;
                 var still = response.data[i].images.fixed_height_still.url;
                 var img = $("<img>")
-                img.attr("src", animate);
+                img.attr("src", still);
                 img.attr("data-still", still);
                 img.attr("data-animate", animate);
                 img.attr("data-state", "still");
@@ -102,26 +85,29 @@ function gifSearch() {
                 newDiv.append("<br>");
                 newDiv.append(ratingDiv);
                 prependGifs(newDiv);
-                gifAnim();
 
 
-                function gifAnim() {
+
+
+            }
+            gifAnim();
+        })
+    })
+}
+
+                    function gifAnim() {
                     $(document).on("click", ".gifAnimation", function () {
                         var state = $(this).attr("data-state");
                         if (state === "still") {
                             $(this).attr("src", $(this).attr("data-animate"));
-                            $(this).attr("data-state", "animate");
+                            $(this).attr(animate);
                         } else {
                             $(this).attr("src", $(this).attr("data-still"));
-                            $(this).attr("data-state", "still");
+                            $(this).attr(still);
                         }
                     });
                 };
-            }
 
-        })
-    })
-}
 
 // User input creates a button
 function createButton() {
@@ -138,17 +124,3 @@ function createButton() {
 function prependGifs(newDiv) {
     $("#gifView").prepend(newDiv);
 }
-
-// // gif animation
-// function gifAnim() {
-//     $(".gifAnimation").on("click", function () {
-//         if (state === "still") {
-//             $(this).attr("src", $(this).attr("data-animate"));
-//             $(this).attr("data-state", "animate");
-//           } else {
-//             $(this).attr("src", $(this).attr("data-still"));
-//             $(this).attr("data-state", "still");
-//           }
-
-//     });
-// };
