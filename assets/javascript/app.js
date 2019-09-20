@@ -1,5 +1,7 @@
 //document.ready so input border animation syncs with header animation
-$( document ).ready
+$(document).ready
+debugger;
+
 
 // Populate buttons at sports top of page
 var sports = ["soccer", "baseball", "football", "basketball", "lacrosse", "hockey"];
@@ -10,7 +12,6 @@ for (var j = 0; j < sports.length; j++) {
     $("#buttons").append(btn);
 }
 gifSearch()
-
 
 // queryURL components//
 var protocol = "https://api.giphy.com/v1/gifs/search?q="
@@ -43,18 +44,20 @@ $("#findGif").on("click", function (event) {
             var animate = response.data[i].images.fixed_height.url;
             var still = response.data[i].images.fixed_height_still.url;
             var img = $("<img>")
-            img.attr("src", animate);
+            img.attr("src", still);
             img.attr("data-still", still);
             img.attr("data-animate", animate);
             img.attr("data-state", "still");
+            img.addClass("gifAnimation");
             newDiv.append(img);
             newDiv.append("<br>");
             newDiv.append(ratingDiv);
             prependGifs(newDiv);
             gifAnim();
 
+
             function gifAnim() {
-                $(".gif").on("click", function () {
+                $(document).on("click", ".gifAnimation", function () {
                     var state = $(this).attr("data-state");
                     if (state === "still") {
                         $(this).attr("src", $(this).attr("data-animate"));
@@ -65,19 +68,11 @@ $("#findGif").on("click", function (event) {
                     }
                 });
             };
+
+
         }
     });
 })
-
-
-// User input creates a button
-function createButton() {
-    var btn = document.createElement("button");
-    btn.innerHTML = $("#userInput").val();
-    $(btn).attr("class", "button");
-    $(btn).addClass("btn btn-info");
-    $("#buttons").append(btn);
-}
 
 // // Trigger ajax call for user pressing button//
 function gifSearch() {
@@ -98,10 +93,11 @@ function gifSearch() {
                 var animate = response.data[i].images.fixed_height.url;
                 var still = response.data[i].images.fixed_height_still.url;
                 var img = $("<img>")
-                img.attr("src", animate);
+                img.attr("src", still);
                 img.attr("data-still", still);
                 img.attr("data-animate", animate);
                 img.attr("data-state", "still");
+                img.addClass("gifAnimation")
                 newDiv.append(img);
                 newDiv.append("<br>");
                 newDiv.append(ratingDiv);
@@ -110,7 +106,7 @@ function gifSearch() {
 
 
                 function gifAnim() {
-                    $(".gif").on("click", function () {
+                    $(document).on("click", ".gifAnimation", function () {
                         var state = $(this).attr("data-state");
                         if (state === "still") {
                             $(this).attr("src", $(this).attr("data-animate"));
@@ -121,22 +117,38 @@ function gifSearch() {
                         }
                     });
                 };
+            }
 
-
-
-
-
-
-
-
+        })
+    })
 }
 
-})
-})
+// User input creates a button
+function createButton() {
+    event.preventDefault();
+    var btn = document.createElement("button");
+    btn.innerHTML = $("#userInput").val();
+    $(btn).attr("class", "button");
+    $(btn).addClass("btn btn-info");
+    $("#buttons").append(btn);
 }
+
 // group img and rating and place them in the "gifView div"
 //put the gifs on the page
 function prependGifs(newDiv) {
     $("#gifView").prepend(newDiv);
 }
 
+// // gif animation
+// function gifAnim() {
+//     $(".gifAnimation").on("click", function () {
+//         if (state === "still") {
+//             $(this).attr("src", $(this).attr("data-animate"));
+//             $(this).attr("data-state", "animate");
+//           } else {
+//             $(this).attr("src", $(this).attr("data-still"));
+//             $(this).attr("data-state", "still");
+//           }
+
+//     });
+// };
