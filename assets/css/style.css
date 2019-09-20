@@ -24,6 +24,15 @@ body {
     font-family: 'Alfa Slab One', cursive;
     font-size: 10vw;
     margin: 0;
+    animation: colorChange 3s infinite;
+    margin-bottom: -2%;
+}
+
+@keyframes colorChange {
+    0% {color: rgb(255, 0, 0)}
+    33% {color: rgb(0, 0, 255);}
+    67% {color: rgb(0, 115, 15);}
+    100% {color: rgb(255, 0, 0)}
 }
 
 #form {
@@ -37,6 +46,14 @@ body {
     margin: 0px 20%;
     border: groove;
     border-color: red;
+    animation: inputBorder 3s infinite;
+}
+
+@keyframes inputBorder {
+    0% {border-color: rgb(255, 0, 0)}
+    33% {border-color: rgb(0, 0, 255);}
+    67% {border-color: rgb(0, 115, 15);}
+    100% {border-color: rgb(255, 0, 0)}
 }
 
 #gifView {

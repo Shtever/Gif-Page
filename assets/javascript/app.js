@@ -1,3 +1,6 @@
+//document.ready so input border animation syncs with header animation
+$( document ).ready
+
 // Populate buttons at sports top of page
 var sports = ["soccer", "baseball", "football", "basketball", "lacrosse", "hockey"];
 for (var j = 0; j < sports.length; j++) {
@@ -52,21 +55,16 @@ $("#findGif").on("click", function (event) {
 
             function gifAnim() {
                 $(".gif").on("click", function () {
-                    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-                    var state = $("<img>").attr("data-state");
-                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                    // Then, set the image's data-state to animate
-                    // Else set src to the data-still value
+                    var state = $(this).attr("data-state");
                     if (state === "still") {
-                        $(this).attr('src', still);
+                        $(this).attr("src", $(this).attr("data-animate"));
                         $(this).attr("data-state", "animate");
                     } else {
-                        $(this).attr('src', animate);
+                        $(this).attr("src", $(this).attr("data-still"));
                         $(this).attr("data-state", "still");
                     }
                 });
             };
-
         }
     });
 })
@@ -113,11 +111,7 @@ function gifSearch() {
 
                 function gifAnim() {
                     $(".gif").on("click", function () {
-                        // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                         var state = $(this).attr("data-state");
-                        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                        // Then, set the image's data-state to animate
-                        // Else set src to the data-still value
                         if (state === "still") {
                             $(this).attr("src", $(this).attr("data-animate"));
                             $(this).attr("data-state", "animate");
@@ -145,3 +139,4 @@ function gifSearch() {
 function prependGifs(newDiv) {
     $("#gifView").prepend(newDiv);
 }
+
